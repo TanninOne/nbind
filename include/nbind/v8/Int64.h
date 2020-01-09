@@ -10,9 +10,10 @@ class Int64 {};
 template <typename ArgType>
 static ArgType int64FromWire(WireType arg, void(init)(const Nan::FunctionCallbackInfo<v8::Value> &args)) {
 	Nan::HandleScope();
+  v8::Local<v8::Context> context = Nan::GetCurrentContext();
 
 	auto target = Nan::To<v8::Object>(arg).ToLocalChecked();
-	auto fromJS = target->Get(Nan::New<v8::String>("fromJS").ToLocalChecked());
+	auto fromJS = target->Get(context, Nan::New<v8::String>("fromJS").ToLocalChecked()).ToLocalChecked();
 
 	if(!fromJS->IsFunction()) throw(std::runtime_error("Type mismatch"));
 

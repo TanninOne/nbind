@@ -19,17 +19,19 @@ v8::Local<v8::Value> makeTypeError(
 ) {
 	(void)args; // Silence compiler warning about unused parameter.
 
+  v8::Local<v8::Context> context = Nan::GetCurrentContext();
+
 	v8::Local<v8::Value> err = Nan::TypeError("Type mismatch");
 	v8::Local<v8::Object> errObj = Nan::To<v8::Object>(err).ToLocalChecked();
 	// v8::Local<v8::Array> typeArray = Nan::New<v8::Array>(count);
 	v8::Local<v8::Array> flagArray = Nan::New<v8::Array>(count);
 
 	for(uint32_t num = 0; num < count; ++num) {
-		flagArray->Set(num, Nan::New<v8::Boolean>(flagList[num]));
+		flagArray->Set(context, num, Nan::New<v8::Boolean>(flagList[num]));
 	}
 
 	// errObj->Set(Nan::New<v8::String>("types").ToLocalChecked(), typeArray);
-	errObj->Set(Nan::New<v8::String>("flags").ToLocalChecked(), flagArray);
+	errObj->Set(context, Nan::New<v8::String>("flags").ToLocalChecked(), flagArray);
 
 	return(err);
 }
