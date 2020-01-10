@@ -14,9 +14,5 @@
 		"sourceMap": false,
 		"strictNullChecks": true,
 		"target": "es5"
-	},
-	"files": [
-		"emscripten.d.ts",
-		"em-api.ts"
-	]
+	}
 }
