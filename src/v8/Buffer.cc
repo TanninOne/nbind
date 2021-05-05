@@ -27,7 +27,7 @@ void BindingType<Buffer> :: initFromArray(WireType arg, Buffer &result) {
 	}
 
 #	if NODE_MODULE_VERSION >= 83 // >= Node.js 14
-		data = static_cast<unsigned char *>(buf->GetBackingStore().Data());
+		data = static_cast<unsigned char *>(buf->GetBackingStore()->Data());
 #	elif NODE_MODULE_VERSION >= 45 // >= IO.js 3.0
 		data = static_cast<unsigned char *>(buf->GetContents().Data());
 #	else // < IO.js 3.0
